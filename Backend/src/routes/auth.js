@@ -49,7 +49,7 @@ authRouter.post("/login",async (req,res)=>{
     if(!user){
        throw new Error("Invalid Credentials");
     }
-    const isPasswordValid = await user.validate(password);
+    const isPasswordValid = await user.validatePassword(password);
     if(!isPasswordValid){
          throw new Error("Invalid Credentials");
     }
@@ -63,7 +63,7 @@ authRouter.post("/login",async (req,res)=>{
     res.send(user);
     }
     }catch(err){
-        res.status.json({message:err.message});
+        res.status(400).json({message:err.message});
     }
 })
 
